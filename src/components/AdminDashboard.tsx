@@ -209,7 +209,7 @@ const AdminDashboard = () => {
         status: versStatutBackend(newProject.status),
         imageUrl: imageUrl,
         url: newProject.url,
-        date: new Date().toLocaleDateString('fr-FR')
+        date: new Date().toISOString(),
       };
 
       console.log('📝 Données projet à créer:', projectData);
