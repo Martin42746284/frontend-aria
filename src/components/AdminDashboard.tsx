@@ -936,7 +936,7 @@ const AdminDashboard = () => {
                             </div>
                           </div>
                           <div className="flex items-center gap-4 text-sm text-gray-400 mb-2">
-                            <span>📅 Créé le {project.date}</span>
+                            <span>📅 Modifiée le {project.date}</span>
                             <span>👤 Client: {project.client}</span>
                             <span>⏳ Durée: {project.duration}</span>
                           </div>
