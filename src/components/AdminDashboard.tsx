@@ -928,9 +928,18 @@ const AdminDashboard = () => {
                                   {formaterStatut('TERMINE')} {/* Affiche "Terminé" */}
                                 </option>
                               </select>
-                              {(projects.filter(p => formaterStatut(p.status) === 'Terminé').length) && (
+                              
+                              {project.status === 'TERMINE' ? (
                                 <span className="px-2 py-1 bg-green-500/20 text-green-400 rounded-full text-xs font-medium border border-green-500/30 flex items-center gap-1">
-                                  🌐 Publié sur le site
+                                  🌐 Projet publiée sur le site
+                                </span>
+                              ) : (
+                                <span className={`px-2 py-1 rounded-full text-xs font-medium border flex items-center gap-1 ${
+                                  project.status === 'EN_ATTENTE' ? 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30' :
+                                  project.status === 'EN_COURS' ? 'bg-blue-500/20 text-blue-400 border-blue-500/30' :
+                                  'bg-gray-500/20 text-gray-400 border-gray-500/30'
+                                }`}>
+                                  Projet {formaterStatut(project.status)}
                                 </span>
                               )}
                             </div>
@@ -975,20 +984,40 @@ const AdminDashboard = () => {
                         </div>
 
                         {/* Indication de publication */}
-                        {(projects.filter(p => formaterStatut(p.status) === 'Terminé').length) && (
-                          <div className="mt-3 p-3 bg-green-500/10 border border-green-500/30 rounded-lg">
-                            <p className="text-green-400 text-sm flex items-center gap-2">
-                              <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                              Ce projet est visible sur la page publique "Nos Réalisations"
-                            </p>
-                          </div>
-                        )}
+                        <div className={`mt-4 p-4 rounded-lg ${
+                          project.status === 'TERMINE' ? 'bg-green-500/15 border-2 border-green-500/40' :
+                          project.status === 'EN_COURS' ? 'bg-blue-500/15 border-2 border-blue-500/40' :
+                          'bg-yellow-500/15 border-2 border-yellow-500/40'
+                        } shadow-sm`}>
+                          <p className={`text-base font-medium flex items-center gap-3 ${
+                            project.status === 'TERMINE' ? 'text-green-50' :
+                            project.status === 'EN_COURS' ? 'text-blue-50' :
+                            'text-yellow-50'
+                          }`}>
+                            <span className={`w-3 h-3 rounded-full animate-pulse ${
+                              project.status === 'TERMINE' ? 'bg-green-300' :
+                              project.status === 'EN_COURS' ? 'bg-blue-300' :
+                              'bg-yellow-300'
+                            }`}></span>
+                            {project.status === 'TERMINE' ? (
+                              <span>Ce projet est <span className="font-semibold">visible</span> sur la page publique <span className="font-semibold">"Nos Réalisations"</span></span>
+                            ) : project.status === 'EN_COURS' ? (
+                              <span>Ce projet est <span className="font-semibold">en cours</span> de réalisation</span>
+                            ) : (
+                              <span>Ce projet est <span className="font-semibold">en attente</span> de démarrage</span>
+                            )}
+                          </p>
+                        </div>
 
-                        {projects.filter(p => formaterStatut(p.status) === 'Terminé').length && (
-                          <div className="mt-3 p-3 bg-yellow-500/10 border border-yellow-500/30 rounded-lg">
-                            <p className="text-yellow-400 text-sm flex items-center gap-2">
-                              <span className="w-2 h-2 bg-yellow-400 rounded-full"></span>
-                              Changez le statut en "Terminé" pour publier ce projet sur le site
+                        {project.status !== 'TERMINE' && (
+                          <div className="mt-4 p-3 bg-yellow-500/20 border-2 border-yellow-500/40 rounded-lg">
+                            <p className="text-yellow-50 text-base font-medium flex items-center gap-3">
+                              <span className="w-3 h-3 bg-yellow-300 rounded-full animate-pulse"></span>
+                              {project.status === 'EN_COURS' ? (
+                                'Dès que ce projet sera terminé, changer leur status comme "Terminé" pour qu\il sera visible sur la page "Nos Réalisations"'
+                              ) : (
+                                'Ce projet est toutjours en attente de démarrage, demarrez-le maintenant !'
+                              )}
                             </p>
                           </div>
                         )}
