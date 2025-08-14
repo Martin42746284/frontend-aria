@@ -1014,7 +1014,7 @@ const AdminDashboard = () => {
                             <p className="text-yellow-50 text-base font-medium flex items-center gap-3">
                               <span className="w-3 h-3 bg-yellow-300 rounded-full animate-pulse"></span>
                               {project.status === 'EN_COURS' ? (
-                                'Dès que ce projet sera terminé, changer leur status comme "Terminé" pour qu\il sera visible sur la page "Nos Réalisations"'
+                                'Dès que ce projet est terminé, changer leur status comme "Terminé" pour qu\il sera visible sur la page "Nos Réalisations"'
                               ) : (
                                 'Ce projet est toutjours en attente de démarrage, demarrez-le maintenant !'
                               )}
